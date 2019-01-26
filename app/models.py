@@ -1,14 +1,14 @@
 from app import db
 
 
-class Rides(db.Model):
+class Ride(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     start_time = db.Column(db.DateTime, index=True)
     end_time = db.Column(db.DateTime)
     bike_id = db.Column(db.Integer)
     trip_duration = db.Column(db.Float)
-    from_station_id = db.Column(db.Integer)
-    to_station_id = db.Column(db.Integer)
+    from_station_id = db.Column(db.Integer, db.ForeignKey('station.id'))
+    to_station_id = db.Column(db.Integer, db.ForeignKey('station.id'))
     user_type = db.Column(db.String(50))
     gender = db.Column(db.String(20))
     birth_year = db.Column(db.Integer)
@@ -18,4 +18,11 @@ class Rides(db.Model):
 
 
 class Station(db.Model):
-    id =
+    id = db.Column(db.Integer, primary_key=True)
+    station_name = db.Column(db.String(150))
+    latitude = db.Column(db.Float)
+    longitude = db.Column(db.Float)
+    rides = db.relationship('Ride', backref='ride', lazy='dynamic')
+
+    def __repr__(self):
+        return '<station_name: {}'.format(self.station_name)
