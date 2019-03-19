@@ -2,7 +2,7 @@ from app import db
 
 
 class Ride(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    trip_id = db.Column(db.Integer, primary_key=True)
     start_time = db.Column(db.DateTime, index=True)
     end_time = db.Column(db.DateTime)
     bike_id = db.Column(db.Integer)
@@ -14,7 +14,7 @@ class Ride(db.Model):
     birth_year = db.Column(db.Integer)
 
     def __repr__(self):
-        return '<ride_id: {}'.format(self.id)
+        return '<ride_id: {}'.format(self.trip_id)
 
 
 class Station(db.Model):
@@ -22,7 +22,7 @@ class Station(db.Model):
     station_name = db.Column(db.String(150))
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
-    rides = db.relationship('Ride', backref='ride', lazy='dynamic')
+    rides = db.relationship('Rides', backref='ride', lazy='dynamic')
 
     def __repr__(self):
         return '<station_name: {}'.format(self.station_name)
