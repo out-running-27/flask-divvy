@@ -14,7 +14,13 @@ class Ride(db.Model):
     birth_year = db.Column(db.Integer)
 
     def __repr__(self):
-        return '<ride_id: {}'.format(self.trip_id)
+        return '<ride_id: {}>'.format(self.trip_id)
+
+    def edge(self):
+        return {
+            "from": self.from_station_id,
+            "to": self.to_station_id
+        }
 
 
 class Station(db.Model):
@@ -22,7 +28,8 @@ class Station(db.Model):
     station_name = db.Column(db.String(150))
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
-    rides = db.relationship('Rides', backref='ride', lazy='dynamic')
+    departures = db.relationship('Ride', foreign_keys='Ride.from_station_id', lazy='dynamic')
+    arrivals = db.relationship('Ride', foreign_keys='Ride.to_station_id', lazy='dynamic')
 
     def __repr__(self):
         return '<station_name: {}'.format(self.station_name)
