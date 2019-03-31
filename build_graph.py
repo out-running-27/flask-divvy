@@ -12,4 +12,5 @@ import pandas as pd
 def create_edgelist():
     rides = Ride.query.limit(100)
     df = pd.DataFrame.from_records([i.edge() for i in rides])
+    print(df.head())
     return df
