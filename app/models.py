@@ -18,8 +18,8 @@ class Ride(db.Model):
 
     def edge(self):
         return {
-            "from": self.from_station_id,
-            "to": self.to_station_id
+            "from_station_id": self.from_station_id,
+            "to_station_id": self.to_station_id
         }
 
 
@@ -32,4 +32,4 @@ class Station(db.Model):
     arrivals = db.relationship('Ride', foreign_keys='Ride.to_station_id', lazy='dynamic')
 
     def __repr__(self):
-        return '<station_name: {}'.format(self.station_name)
+        return '<station_name: {}>'.format(self.station_name)
