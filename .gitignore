@@ -107,7 +107,7 @@ venv.bak/
 .idea/
 
 # Data files
-data/
+data/*.csv
 
 # database
 *.db
