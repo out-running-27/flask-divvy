@@ -18,6 +18,7 @@ class Ride(db.Model):
 
     def edge(self):
         return {
+            "start_time": self.start_time,
             "from_station_id": self.from_station_id,
             "to_station_id": self.to_station_id
         }

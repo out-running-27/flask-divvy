@@ -33,9 +33,9 @@ def get_ride_data(file_list, trunc=False):
         df.columns = ['start_time', 'end_time', 'bike_id', 'trip_duration',
                       'from_station_id', 'to_station_id', 'gender', 'birth_year']
         df.to_sql('ride', con=engine, if_exists='append')
-        print('Inserted {} into ride'.format(file))
+        print('INFO: Inserted {} into ride'.format(file))
         session.commit()
-        session.close()
+    session.close()
 
 
 def get_station_data():
